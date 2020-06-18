@@ -1,14 +1,24 @@
 const express = require('express');
 const app = express();
+const PORT = 3000;
 
-const usersRouter = require('./routes/users');
+// middleware
+const cors = require('./middleware/cors')
 
+// routes
+const UserRouter = require('./routes/users');
+//const moviesRouter = require('./routes/movies');
 
-const port = 3000;
-
-
+// express to JSON
 app.use(express.json());
+// encoded url
 app.use(express.urlencoded({ extended: true }));
-app.use('/users', usersRouter);
 
+app.use(cors);
+
+app.use('/users', UserRouter);
+//app.use('/movies', moviesRouter);
+
+//port
 app.listen(PORT, () => console.log('server running on port ' + PORT))
+

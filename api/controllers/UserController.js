@@ -3,10 +3,10 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
 const UserController = {
-    async getAll(req,res) {
+    async getUsers(req,res) {
         try {
             const users = await User.findAll();
-            res.send(users);
+            res.status(200).send(users);
         } catch (error) {
             console.error(error);
             res.status(500).send({ message: 'There was a problem trying to get the user.' });
@@ -36,7 +36,7 @@ const UserController = {
                 throw new Error('Wrong username or password.')
             }
 
-            const token = jwt.sign({ id: user.id}, '', { expiresIn: '2y' });
+            const token = jwt.sign({ id: user.id}, 'patata123', { expiresIn: '2y' });
             await Token.create({ 
                 token:token,
                 UserId: user.id,
