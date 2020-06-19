@@ -3,9 +3,9 @@ const UserController = require('../controllers/UserController');
 
 const auth = require('../middleware/auth');
 
-router.get('/getusers', auth, UserController.getUsers);
-router.post('/signup', auth, UserController.signup);
-router.post('/login', auth, UserController.login);
+router.get('/',  UserController.getAll);
+router.post('/signup',  UserController.signup);
+router.post('/login',  UserController.login);
 
 /*
 app.post('/user/crear', addUser);

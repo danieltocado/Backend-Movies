@@ -3,7 +3,7 @@ const app = express();
 const PORT = 3000;
 
 // middleware
-const cors = require('./middleware/cors')
+//const cors = require('./middleware/cors')
 
 // routes
 const UserRouter = require('./routes/users');
@@ -14,7 +14,7 @@ app.use(express.json());
 // encoded url
 app.use(express.urlencoded({ extended: true }));
 
-app.use(cors);
+//app.use(cors);
 
 app.use('/users', UserRouter);
 //app.use('/movies', moviesRouter);

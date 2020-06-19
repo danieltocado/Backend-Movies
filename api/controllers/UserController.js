@@ -1,9 +1,9 @@
 const { User, Token } = require('../models');
-const bcrypt = require('bcryptjs');
+const bcryptjs = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
 const UserController = {
-    async getUsers(req,res) {
+    /*getAll(req,res) {
         try {
             const users = await User.findAll();
             res.status(200).send(users);
@@ -11,16 +11,26 @@ const UserController = {
             console.error(error);
             res.status(500).send({ message: 'There was a problem trying to get the user.' });
         }
+        
+        
+    },*/
+    getAll(req, res) {
+        User.findAll()
+            .then(users => res.send(users))
+            .catch(error => {
+                console.error(error);
+                res.status(500).send({ message: 'There was a problem trying to create the user' });
+            })
     },
     async signup(req,res) {
         try {
             const user = await User.create(req.body);
-            //Hash password
-            const hash = await bcrypt.hash(req.body.password, 9);
+            const hash = await bcryptjs.hash(req.body.password, 9);
             req.body.password = hash;
+            res.status(200).send(user)
         } catch (error) {
-            console.error(error);
-            res.status(500).send({ message: 'There was a problem trying to create the account.'})
+            console.log(error)
+            res.status(500).send({ message : 'There was a problem trying to add the user'});
         }
     },
     async login(req,res) {
