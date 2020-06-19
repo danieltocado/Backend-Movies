@@ -41,7 +41,7 @@ const UserController = {
                 }
             });
 
-            const isMatch = await bcrypt.compare(req.body.password, user.password);
+            const isMatch = await bcryptjs.compare(req.body.password, user.password);
             if (!isMatch) {
                 throw new Error('Wrong username or password.')
             }
