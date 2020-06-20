@@ -8,7 +8,7 @@ const MovieController = {
             
         } catch (error) {
             console.log(error)
-            res.status(500).send({ message : 'There was a problem trying to get the users.'})
+            res.status(500).send({ message : 'There was a problem trying to get the movies.'})
         }
     },
     async searchtitle(req,res) {
@@ -20,12 +20,12 @@ const MovieController = {
                 }
             });
             if (movie === null){
-                res.status(400).send({ message : 'There was a problem trying to get the film.'});
+                res.status(400).send({ message : 'There was a problem trying to get the movie.'});
             }
             res.status(200).send(movie);
         } catch (error) {
             console.log(error)
-            res.status(500).send({ message : 'There was a problem trying to create the film.'})
+            res.status(500).send({ message : 'There was a problem trying to create the movie.'})
         }
     },
     async searchid(req,res) {
@@ -37,13 +37,14 @@ const MovieController = {
                 }
             })
             if (movieId === null){
-                res.status(400).send({ message : 'There was a problem trying to find the film.'})
+                res.status(400).send({ message : 'There was a problem trying to find the movie.'})
             }
             res.status(200).send(movieId);
         } catch (error) {
             console.log(error)
-            res.status(500).send({ message : 'There was a problem trying to update the film.'})
+            res.status(500).send({ message : 'There was a problem trying to update the movie.'})
         }
     }
 }
+
 module.exports = MovieController;

@@ -61,7 +61,21 @@ const UserController = {
                 message: 'There was a problem trying to login'
             });
         }
-    }
+    },
+    async delete(req,res) {
+        try {
+            const { id } = req.params
+            const user = await User.destroy({
+                where : {
+                    id : id
+                }
+            })
+            res.status(200).send({ message : 'User deleted.'})
+        } catch (error) {
+            console.log(error)
+            res.status(500).send({ message : 'There was a problem login the user.'})
+        }
+    } 
 }
 
 module.exports = UserController;
