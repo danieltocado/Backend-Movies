@@ -24,10 +24,10 @@ const UserController = {
     },
     async signup(req,res) {
         try {
+            const hash = await bcryptjs.hash(req.body.password, 9); // el 9 son las rondas de salt
+            req.body.password = hash; //reescribo la contraseña por el hash obtenido
             const user = await User.create(req.body);
-            const hash = await bcryptjs.hash(req.body.password, 9);
-            req.body.password = hash;
-            res.status(200).send(user)
+            res.status(201).send(user);
         } catch (error) {
             console.log(error)
             res.status(500).send({ message : 'There was a problem trying to add the user'});
