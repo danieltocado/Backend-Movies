@@ -10,16 +10,14 @@ const UserController = {
         } catch (error) {
             console.error(error);
             res.status(500).send({ message: 'There was a problem trying to get the user.' });
-        }
-        
-        
+        }  
     },*/
     getAll(req, res) {
         User.findAll()
             .then(users => res.send(users))
             .catch(error => {
                 console.error(error);
-                res.status(500).send({ message: 'There was a problem trying to create the user' });
+                res.status(500).send({ message: 'There was a problem trying to get the user' });
             })
     },
     async signup(req,res) {
@@ -30,7 +28,7 @@ const UserController = {
             res.status(201).send(user);
         } catch (error) {
             console.log(error)
-            res.status(500).send({ message : 'There was a problem trying to add the user'});
+            res.status(500).send({ message : 'There was a problem trying to create the user'});
         }
     },
     async login(req,res) {
@@ -46,7 +44,7 @@ const UserController = {
                 throw new Error('Wrong username or password.')
             }
 
-            const token = jwt.sign({ id: user.id}, 'patata123', { expiresIn: '2y' });
+            const token = jwt.sign({ id: user.id }, 'patata123', { expiresIn: '2y' });
             await Token.create({ 
                 token:token,
                 UserId: user.id,
